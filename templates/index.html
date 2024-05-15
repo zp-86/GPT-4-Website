@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPT-4</title>
+    <link rel="icon" type="image/x-icon" href="/static/icon.jpg">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    <div class="mx-auto p-2 text-center" style="width: 200px">
+        <h1 style="padding-top: 10px">GPT-4</h1>
+    </div>
+    <div class="container">
+        <form method="post" class="custom-form row g-3 align-items-center">
+            <div class="col-9">
+                <input style="margin-top: 15px" type="text" id="prompt" class="form-control" name="prompt" placeholder="Enter your prompt">
+            </div>
+            <div class="col-auto">
+                <input style="margin-top: 15px" type="text" id="key" class="form-control" name="key" placeholder="Enter your key">
+            </div>
+            <div class="col-auto">
+                <input style="margin-top: 15px" type="submit" class="btn btn-primary" name="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+
+    <div class="container text-center" style="padding-top: 10px">
+    <div class="col-mx-auto">
+        <div class="card text-bg-dark" style="height: 450px; display: flex; flex-direction: column;">
+            <img src="/static/grey.jpg" class="card-img" style="width: auto; height: 100%;" alt="">
+            <div class="card-img-overlay" style="display: flex; flex-direction: column;">
+                <div class="card-body" style="overflow-y: scroll; flex-grow: 1;" id="chat-box"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
