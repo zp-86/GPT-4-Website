@@ -1,9 +1,9 @@
 import requests
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-import openai
+from openai import OpenAI
 
-app = Flask(__name__)
-openai.api_key = ""
+client = OpenAI()
+app = Flask(__name__) # defaults to getting the key using os.environ.get("OPENAI_API_KEY")
 
 chat_history = {}
 
@@ -24,24 +24,23 @@ def send_message():
         if session_id not in chat_history:
             chat_history[session_id] = []
 
-        chat_history[session_id].append({"message": prompt, "sender": "user"})
+        chat_history[session_id].append({"role": "user", "content": prompt})
 
-        messages = [
-            {"role": "system", "content": "You are a helpful assistant named GPT-4."},
-            {"role": "user", "content": prompt},
-        ]
-
+        messages = [{"role": "system", "content": "You are a helpful assistant named GPT-4."}]
         chat_messages = chat_history[session_id]
-        for message in chat_messages:
-            messages.append(
-                {"role": "user" if message["sender"] == "user" else "assistant", "content": message["message"]})
 
-        completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo-16k",
+        for message in chat_messages:
+            role = "user" if message.get("sender") == "user" else "assistant"
+            messages.append({"role": role, "content": message.get("message", "")})
+
+        messages.append({"role": "user", "content": prompt})
+
+        completion = client.chat.completions.create(
+            model="gpt-4o",
             messages=messages,
         )
-        answer = completion.choices[0].message["content"]
-        chat_history[session_id].append({"message": answer, "sender": "assistant"})
+        answer = completion.choices[0].message.content
+        chat_history[session_id].append({"role": "assistant", "content": answer})
 
         server_response = answer
     elif key == "reset":
